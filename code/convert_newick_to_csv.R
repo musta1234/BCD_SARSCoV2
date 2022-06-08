@@ -23,12 +23,19 @@ df_nex <- df %>%
   filter(mtime == max(mtime)) %>% select(filename) %>%
   unlist()
 
-df_nex <- df %>% 
-  filter( . , grepl("nwk", filename ))
+
+nex_tree <- ape::read.nexus(df_nex)
+nwk_tree <- ape::read.tree(df_nwk)
+
+#plot(nex_tree)
+View(cophenetic(nwk_tree))
+
+x <- as.vector(D)
+y <- as.vector(as.dist(cophenetic(tre2)))
 
 
-latest_newick <- 
-  
-rownames(df)[which.max(df$mtime)]
 
-#[1] "/path/to/your/directory/Interested_file.xlsx"
+View(nex_tree[1])
+nex_tree <- ape::read.nexus(df_nex[[1]])
+
+ape::read.nexus(filename)
