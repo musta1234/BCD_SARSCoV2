@@ -23,17 +23,18 @@ df_nex <- df %>%
   filter(mtime == max(mtime)) %>% select(filename) %>%
   unlist()
 
+nex_tree <- read.nexus(df_nex)
+nwk_tree <- read.tree(df_nwk)
+#plot(nex_tree); #View(cophenetic(nwk_tree))
 
-nex_tree <- ape::read.nexus(df_nex)
-nwk_tree <- ape::read.tree(df_nwk)
+nwk_mat <-  cophenetic(nwk_tree)
 
-#plot(nex_tree)
-View(cophenetic(nwk_tree))
+nwk_list <- t(combn(colnames(nwk_mat), 2) )
+        
+nwk_df <- data.frame(nwk_list, dist=nwk_mat[nwk_list])
 
-x <- as.vector(D)
-y <- as.vector(as.dist(cophenetic(tre2)))
-
-
+#xy <- t(combn(colnames(m), 2))
+data.frame(xy, dist=m[xy])
 
 View(nex_tree[1])
 nex_tree <- ape::read.nexus(df_nex[[1]])
