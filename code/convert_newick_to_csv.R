@@ -25,18 +25,11 @@ df_nex <- df %>%
 
 nex_tree <- read.nexus(df_nex)
 nwk_tree <- read.tree(df_nwk)
-#plot(nex_tree); #View(cophenetic(nwk_tree))
-
+##xy <- t(combn(colnames(m), 2)); data.frame(xy, dist=m[xy])
+#code chunk below takes nxn matrix and converts it to pairwise dataframe
 nwk_mat <-  cophenetic(nwk_tree)
-
 nwk_list <- t(combn(colnames(nwk_mat), 2) )
-        
 nwk_df <- data.frame(nwk_list, dist=nwk_mat[nwk_list])
 
-#xy <- t(combn(colnames(m), 2))
-data.frame(xy, dist=m[xy])
 
-View(nex_tree[1])
-nex_tree <- ape::read.nexus(df_nex[[1]])
 
-ape::read.nexus(filename)
